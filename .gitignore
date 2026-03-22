@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+*.dist
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+.DS_Store
+.env.*.local
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.turbo/

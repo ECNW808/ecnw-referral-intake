@@ -42,7 +42,7 @@ export async function checkRateLimit(request: NextRequest): Promise<{ allowed: b
     }
 
     const record = existing[0];
-    const windowStart = record.windowStart ? new Date(record.windowStart) : now;
+    const windowStart = record.windowStart ? new Date(record.windowStart as any) : now;
     const timeSinceWindowStart = now.getTime() - windowStart.getTime();
 
     // Reset window if expired
@@ -59,7 +59,8 @@ export async function checkRateLimit(request: NextRequest): Promise<{ allowed: b
     }
 
     // Check if limit exceeded
-    if (record.requestCount >= RATE_LIMIT_MAX_REQUESTS) {
+    const requestCount = record.requestCount || 0;
+    if (requestCount >= RATE_LIMIT_MAX_REQUESTS) {
       return { allowed: false, remaining: 0 };
     }
 
@@ -67,12 +68,12 @@ export async function checkRateLimit(request: NextRequest): Promise<{ allowed: b
     await db
       .update(rateLimitTracking)
       .set({
-        requestCount: record.requestCount + 1,
+        requestCount: requestCount + 1,
         lastRequest: now,
       })
       .where(eq(rateLimitTracking.ipAddress, ip));
 
-    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - (record.requestCount + 1) };
+    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - (requestCount + 1) };
   } catch (error) {
     console.error('Rate limit check error:', error);
     // Allow request if database error (fail open)
@@ -99,11 +100,7 @@ export async function rateLimitMiddleware(request: NextRequest) {
     );
   }
 
-  return NextResponse.next({
-    request: {
-      headers: {
-        'X-RateLimit-Remaining': remaining.toString(),
-      },
-    },
-  });
+  const response = NextResponse.next();
+  response.headers.set('X-RateLimit-Remaining', remaining.toString());
+  return response;
 }

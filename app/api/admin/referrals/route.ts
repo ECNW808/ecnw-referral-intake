@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/client';
 import { referrals, facilities, auditLogs } from '@/lib/db/schema';
 import { verifyJWT } from '@/lib/utils/auth';
-import { eq, desc } from 'drizzle-orm';
+import { eq, desc, inArray } from 'drizzle-orm';
 
 /**
  * Get all referrals (requires admin authentication)
@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
 
     // Build query
-    let query = db.select().from(referrals);
+    let query = db.select().from(referrals) as any;
 
     if (status) {
       query = query.where(eq(referrals.status, status));
@@ -55,16 +55,18 @@ export async function GET(request: NextRequest) {
       .offset(offset);
 
     // Get facility names
-    const facilityIds = [...new Set(results.map(r => r.facilityId))];
-    const facilitiesData = await db
-      .select()
-      .from(facilities)
-      .where(eq(facilities.id, facilityIds[0]));
+    const facilityIds = [...new Set(results.map((r: any) => r.facilityId))] as number[];
+    const facilitiesData = facilityIds.length > 0 
+      ? await db
+          .select()
+          .from(facilities)
+          .where(inArray(facilities.id, facilityIds))
+      : [];
 
-    const facilitiesMap = new Map(facilitiesData.map(f => [f.id, f.name]));
+    const facilitiesMap = new Map(facilitiesData.map((f: any) => [f.id, f.name]));
 
     // Format response
-    const formattedResults = results.map(r => ({
+    const formattedResults = (results as any[]).map((r: any) => ({
       ...r,
       facilityName: facilitiesMap.get(r.facilityId) || 'Unknown',
     }));

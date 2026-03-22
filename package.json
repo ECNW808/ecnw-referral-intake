@@ -13,27 +13,29 @@
     "setup:facilities": "tsx scripts/setup-facilities.ts"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "bcryptjs": "^2.4.3",
+    "drizzle-kit": "^0.20.0",
+    "drizzle-orm": "^0.29.0",
+    "isomorphic-dompurify": "^2.3.0",
     "next": "^14.0.0",
+    "pg": "^8.11.0",
+    "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "pg": "^8.11.0",
-    "drizzle-orm": "^0.29.0",
-    "drizzle-kit": "^0.20.0",
-    "bcryptjs": "^2.4.3",
-    "isomorphic-dompurify": "^2.3.0",
-    "zod": "^3.22.0",
     "tailwindcss": "^3.3.0",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31"
+    "zod": "^3.22.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.0.0",
+    "@types/pg": "^8.20.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "typescript": "^5.3.0",
-    "tsx": "^4.0.0",
     "eslint": "^8.54.0",
-    "eslint-config-next": "^14.0.0"
+    "eslint-config-next": "^14.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.3.0"
   },
   "engines": {
     "node": ">=18.0.0",

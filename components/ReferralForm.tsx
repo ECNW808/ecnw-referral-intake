@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { sanitizeReferralForm, validateReferralForm } from '@/lib/utils/validation';
-import { isBotSubmission, isValidInteractionTiming, getHoneypotHtml, HONEYPOT_FIELD_NAME } from '@/lib/utils/botProtection';
+import { sanitizeReferralForm, validateReferralForm } from '../lib/utils/validation';
+import { isBotSubmission, isValidInteractionTiming, getHoneypotHtml, HONEYPOT_FIELD_NAME } from '../lib/utils/botProtection';
 
 interface ReferralFormProps {
   facilityId: number;

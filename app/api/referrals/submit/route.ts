@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/client';
-import { referrals, attachments, auditLogs } from '@/lib/db/schema';
-import { verifyToken } from '@/lib/utils/token';
-import { checkRateLimit } from '@/lib/middleware/rateLimit';
-import { facilities } from '@/lib/db/schema';
+import { db } from '../../../../lib/db/client';
+import { referrals, attachments, auditLogs } from '../../../../lib/db/schema';
+import { verifyToken } from '../../../../lib/utils/token';
+import { checkRateLimit } from '../../../../lib/middleware/rateLimit';
+import { facilities } from '../../../../lib/db/schema';
 import { eq } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {
@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Send email notification (no PHI)
-    const { sendReferralNotification } = await import('@/lib/utils/email');
+    const { sendReferralNotification } = await import('../../../../lib/utils/email');
     const patientInitials = `${formDataJson.patientFirstName[0]}${formDataJson.patientLastName[0]}`;
     await sendReferralNotification(facility[0].name, referral.id, patientInitials);
 

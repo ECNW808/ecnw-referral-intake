@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/client';
-import { facilities } from '@/lib/db/schema';
+import { db } from '../../../lib/db/client';
+import { facilities } from '../../../lib/db/schema';
 import { eq } from 'drizzle-orm';
-import { verifyToken } from '@/lib/utils/token';
+import { verifyToken } from '../../../lib/utils/token';
 
 export async function POST(request: NextRequest) {
   try {

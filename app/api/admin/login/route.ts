@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/client';
-import { adminUsers } from '@/lib/db/schema';
-import { verifyPassword, generateJWT } from '@/lib/utils/auth';
+import { db } from '../../../../lib/db/client';
+import { adminUsers } from '../../../../lib/db/schema';
+import { verifyPassword, generateJWT } from '../../../../lib/utils/auth';
 import { eq } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/client';
-import { referrals, facilities, auditLogs } from '@/lib/db/schema';
-import { verifyJWT } from '@/lib/utils/auth';
+import { db } from '../../../../lib/db/client';
+import { referrals, facilities, auditLogs } from '../../../../lib/db/schema';
+import { verifyJWT } from '../../../../lib/utils/auth';
 import { eq, desc, inArray } from 'drizzle-orm';
 
 /**

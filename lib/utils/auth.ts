@@ -74,3 +74,4 @@ export function verifyJWT(token: string): { adminId: number } | null {
 export function generatePassword(length: number = 16): string {
   return crypto.randomBytes(length).toString('base64').slice(0, length);
 }
+

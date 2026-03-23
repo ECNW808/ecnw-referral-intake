@@ -30,3 +30,4 @@ export async function testConnection() {
 }
 
 export default db;
+

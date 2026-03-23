@@ -1,0 +1,4 @@
+# Ensure these critical files are always included
+lib/utils/auth.ts export-ignore=false
+lib/db/client.ts export-ignore=false
+lib/db/schema.ts export-ignore=false

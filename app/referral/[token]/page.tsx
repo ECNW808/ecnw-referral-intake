@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import ReferralForm from '@/components/ReferralForm';
+import ReferralForm from '../../../components/ReferralForm';
 
 export default function ReferralPage() {
   const params = useParams();

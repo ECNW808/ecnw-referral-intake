@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/client';
-import { rateLimitTracking } from '@/lib/db/schema';
+import { db } from '../db/client';
+import { rateLimitTracking } from '../db/schema';
 import { eq } from 'drizzle-orm';
 
 const RATE_LIMIT_WINDOW_MS = parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'); // 15 minutes
